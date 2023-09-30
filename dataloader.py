@@ -1,9 +1,10 @@
+from tensor import MyTensor
 from sklearn.datasets import make_moons
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-class DataSet:
+class MyDataSet:
     def __init__(self, X, y):
         self.X = X
         self.y = y
@@ -15,7 +16,7 @@ class DataSet:
         return len(self.X)
 
 
-class HalfMoonDataSet(DataSet):
+class HalfMoonDataSet(MyDataSet):
     def __init__(self, n_samples=1000, noise=0.05, random_state=0):
         X, y = make_moons(n_samples=n_samples, noise=noise, random_state=random_state)
         y = np.eye(2)[y]
@@ -26,7 +27,7 @@ class HalfMoonDataSet(DataSet):
         plt.show()
 
 
-class DataLoader:
+class MyDataLoader:
     def __init__(self, dataset, batch_size=1, shuffle=False):
         self.dataset = dataset
         self.batch_size = batch_size
@@ -51,4 +52,4 @@ class DataLoader:
         X = np.array([x for x, _ in batch])
         y = np.array([y for _, y in batch])
         self.index += self.batch_size
-        return X, y
+        return MyTensor(X), MyTensor(y)
